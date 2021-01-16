@@ -85,7 +85,7 @@ class TPXO:
     def get_velocity(self, constituent, vertices):
         index = self.constituents.index(constituent.lower().capitalize())
         u, v = read_transport_file(self._ufile, index)
-        xq = np.asarray([x + 360. for x in vertices[:, 0] if x < 0]).flatten()
+        xq = np.asarray([x + 360. if x < 0 else x for x in vertices[:, 0] ]).flatten()
         yq = vertices[:, 1].flatten()
         xi, yi = np.meshgrid(self.x, self.y)
         dx = np.mean(np.diff(self.x))
